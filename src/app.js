@@ -4,20 +4,35 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
-app.use("/", (req, res)=>{
-    res.send("This is my home page");
+//This will handle all the HTTP request methods for user because of order
+// app.use("/user", (req, res)=>{
+//     res.send("HAHAHAHAHAHAHA!!!");
+// });
+
+//This will only handle GET call to user
+app.get("/user", (req, res)=>{
+    res.send({firstname: "Satyam", lastname: "Jha"});
 });
 
-app.use("/hello", (req, res)=>{
-    res.send("Hello World!");
+//This will only handle POST call to user
+app.post("/user", (req, res)=>{
+    //saving data to DB
+    res.send("Data successfully saved to DB!");
 });
 
+//This will only handle DELETE call to user
+app.delete("/user", (req, res)=>{
+    //deleting data from DB
+    res.send("Data successfully deleted from DB!");
+});
+
+app.patch("/user", (req, res)=>{
+    //updating data in DB
+    res.send("Data successfully updated in DB!");
+});
+//this will match all the HTTP request methods
 app.use("/test", (req, res)=>{
     res.send("This is my test page");
-});
-
-app.get("/about", (req, res)=>{
-    res.send("This is my about page");
 });
 
 app.listen(port, ()=>{
